@@ -1,7 +1,7 @@
 let human_score = 0, cat_score = 0;
 const human_img = document.querySelector(`#human_img`);
 const cat_img = document.querySelector(`#cat_img`);
-let human_hand, cat_paw;
+let human_hand = -1, cat_paw = -1;
 
 document.querySelector(`#option_rock`).addEventListener(`click`,()=>{
     human_img.innerHTML = `<img src="./human/1.png">`;
@@ -20,13 +20,18 @@ document.querySelector(`#option_scissor`).addEventListener(`click`,()=>{
 
 
 document.querySelector(`#submit`).onclick = function(){
-    let i = (Math.trunc(Math.random()*10)%3)+1;
-    cat_img.innerHTML = `<img src="./cat/${i}.png">`;
-    cat_paw = i;
-    let arr = [human_hand, cat_paw];
-    if(human_hand != cat_paw)calScore(arr);
-    document.querySelector(`#ur_score`).textContent = `you : ${human_score}`;
-    document.querySelector(`#cat_score`).textContent = `cat : ${cat_score}`;
+    if(human_hand != -1){
+        let i = (Math.trunc(Math.random()*10)%3)+1;
+        cat_img.innerHTML = `<img src="./cat/${i}.png">`;
+        cat_paw = i;
+        let arr = [human_hand, cat_paw];
+        if(human_hand != cat_paw)calScore(arr);
+        document.querySelector(`#ur_score`).textContent = `you : ${human_score}`;
+        document.querySelector(`#cat_score`).textContent = `cat : ${cat_score}`;
+    }else{
+        alert(`select a gesture`);
+    }
+    
 }
 
 function calScore(arr){
